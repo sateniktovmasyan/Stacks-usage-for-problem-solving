@@ -1,9 +1,10 @@
-class Stack:
+class MyStack:
     def __init__(self):
+        # array
         self.stack = []
 
     def pop(self):
-        if self.isEmpty():
+        if self.isempty():
             return None
         else:
             return self.stack.pop()
@@ -12,7 +13,7 @@ class Stack:
         return self.stack.append(val)
 
     def peak(self):
-        if self.isEmpty():
+        if self.isempty():
             return None
         else:
             return self.stack[-1]
@@ -20,36 +21,35 @@ class Stack:
     def size(self):
         return len(self.stack)
 
-    def isEmpty(self):
+    def isempty(self):
         return self.size() == 0
 
-    def display(self):
-        print self.stack
-
-
-def parChecker(symbolString):
-    s = Stack()
+    
+def balancedornot(string):
+    s = MyStack()
+    # s is MyStack type
     balanced = True
     index = 0
-    while index < len(symbolString) and balanced:
-        symbol = symbolString[index]
-        if symbol == "(":
-            s.push(symbol)
+    while index < len(string) and balanced:
+        bracket = string[index]
+        if bracket == "(":
+            s.push(bracket)
         else:
-            if s.isEmpty():
+            if s.isempty():
                 balanced = False
             else:
                 s.pop()
 
         index = index + 1
 
-    if balanced and s.isEmpty():
-        return True
+    if balanced and s.isempty():
+        print('string is balanced')
     else:
-        return False
+        print ('it is unbalanced')
 
 
 def main():
-    b = parChecker
-    b.parChecker('((()))')
+    balancedornot('((()()(()()()))')
+
+
 main()
