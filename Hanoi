@@ -39,14 +39,18 @@ class Hanoi:
         # in descending order
         for k in data:
             self.input.push(k)
+            
         while self.input.isempty() != bool(1):
             # works while is not empty
             self.temporary = self.input.peak()
             self.input.pop()
+            
             while self.output.isempty() != bool(1) and int(self.output.peak()) < int(self.temporary):
                 self.input.push(self.output.peak())
                 self.output.pop()
+                
             self.output.push(self.temporary)
+            
         self.output.display()
 
 
