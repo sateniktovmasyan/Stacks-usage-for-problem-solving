@@ -1,9 +1,10 @@
 class Stack:
     def __init__(self):
+        # array
         self.stack = []
 
     def pop(self):
-        if self.is_empty():
+        if self.isempty():
             return None
         else:
             return self.stack.pop()
@@ -12,7 +13,7 @@ class Stack:
         return self.stack.append(val)
 
     def peak(self):
-        if self.is_empty():
+        if self.isempty():
             return None
         else:
             return self.stack[-1]
@@ -20,36 +21,40 @@ class Stack:
     def size(self):
         return len(self.stack)
 
-    def is_empty(self):
+    def isempty(self):
         return self.size() == 0
 
     def display(self):
         print self.stack
 
 
-class TowerOfHanoi:
-    def __init__(self, numDisks):
-        self.numDisks = numDisks
-        self.towers = [Stack(), Stack(), Stack()]
-        for i in range(n, -1, -1):
-            towers[0].push(i);
+class Hanoi:
+    def __init__(self):
+        self.temporary = Stack()
+        # temporary stack will help not to loose objects while sorting
+        self.input = Stack()
+        self.output = Stack()
+
+    def place(self, data):
+        # in descending order
+        for k in data:
+            self.input.push(k)
+        while self.input.isempty() != bool(1):
+            # works while is not empty
+            self.temporary = self.input.peak()
+            self.input.pop()
+            while self.output.isempty() != bool(1) and int(self.output.peak()) < int(self.temporary):
+                self.input.push(self.output.peak())
+                self.output.pop()
+            self.output.push(self.temporary)
+        self.output.display()
 
 
-def moveDisk(src, dest):
-    towers[dest].push(towers[src].pop())
-
-
-def moveTower(n, src, spare, dest):
-    if n == 0:
-        moveDisk(src, dest)
-    else:
-        moveTower(n - 1, src, dest, spare)
-        moveDisk(src, dest)
-        moveTower(n - 1, spare, src, dest)
 def main():
-    hanoi = TowerOfHanoi
-    hanoi.moveDisk()
-    hanoi.moveTower()
+    sortdata = Hanoi()
+    print ("bigger one is put at first")
+    sortdata.place((8, 14, 28, 25, 9, 5))
+    print ("*") * 50
 
 
 main()
